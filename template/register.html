@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>register</title>
+</head>
+<body>
+    <h1>User Register</h1>
+    <form action="" method="post">
+        <label>user:</label>
+        <input type="text" name="username">
+        <label>name:</label>
+        <input type="text" name="name">
+        <label>password:</label>
+        <input type="text" name="password">
+        <input type="submit" name="submit">
+    </form>
+
+    <table>
+        <tr>
+            <th>
+                UserName
+            </th>
+            <th>
+                LoginName
+            </th>
+            <th>
+                Password
+            </th>
+        </tr>
+
+        {% for user in all_user %}
+        <tr>
+            <td>
+                {{ user.name }}
+            </td>
+            <td>
+                {{ user.username }}
+            </td>
+            <td>
+                {{ user.password }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+
+
+    <h1>User Delete</h1>
+    <form action="" method="post">
+        <label>userId:</label>
+        <input type="text" name="username">
+
+        <input type="submit" name="delete" value="Delete">
+    </form>
+
+    <table border="">
+        <tr>
+            <th>
+                UserName
+            </th>
+            <th>
+                LoginName
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Operation
+            </th>
+        </tr>
+
+        {% for user in all_user %}
+        <tr>
+            <td>
+                {{ user.name }}
+            </td>
+            <td>
+                {{ user.username }}
+            </td>
+            <td>
+                {{ user.password }}
+            </td>
+            <td>
+{#                <a href="/delete/{{ user.id }}">#}
+                <a href="/delete/{{ user.id }}?userId={{ user.id }}">
+                    Delete
+                </a>
+
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+
+<p>+++++++++++++++++++++++++++++++++++++++++++++</p>
+
+    <h1>Privileges Register</h1>
+    <form action="/registerPrivilege" method="post">
+        <label>Name:</label>
+        <input type="text" name="username">
+
+        <input type="submit"  value="submit">
+    </form>
+
+    <table border="">
+        <tr>
+            <th>
+                PrivilegeId
+            </th>
+            <th>
+                PrivilegeName
+            </th>
+        </tr>
+
+        {% for privilege in all_privilege %}
+        <tr>
+            <td>
+                {{ privilege.id }}
+            </td>
+            <td>
+                {{ privilege.name }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h1>用户授权</h1>
+    <form action="/userPrivilege" method="post">
+        <label>UserId:</label>
+        <input type="text" name="userId">
+        <label>PrivilegeId</label>
+        <input type="text" name="privilegeId">
+        <input type="submit"  value="submit">
+    </form>
+
+    <table>
+        <tr>
+            <th>UserId</th>
+            <th>PrivilegeId</th>
+        </tr>
+        {% for up in all_privilege%}
+        <tr>
+            <td>{{ up.userId }}</td>
+            <td>{{ up.privilegesId }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <h1>查询</h1>
+        <form action="uprivilege" method="post">
+            <label>查询UserID</label>
+            <input type="text" value="userId">
+            <input type="submit" name="submit">
+        </form>
+</body>
+</html>
